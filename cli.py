@@ -19,13 +19,6 @@ def print_r(sys):
 ********************************************************
     '''.format(sys))
 
-
-if platform.system().lower() == 'linux':
-    print_r('Linux  ')
-elif platform.system().lower() == 'windows':
-    print_r('Windows')
-
-
 class NumberValidator(Validator):
     def validate(self, document):
         try:
@@ -51,9 +44,25 @@ def styler():
         Token.Question: '#21ed39',
     })
     return style
+def _inputType():
+    questions = [
+        {
+            'type':'list',
+            'name':'type',
+            'message':'Please specify an input type!',
+            'choices':[
+                'Enter a single name',
+                'Enter multiple usernames through a file'
+            ]
+        }
+    
+    ]
+    answers = prompt(questions,style=styler())
+    return answers
 
 
 def spam_info():
+    inp = _inputType()
     questions = [
         {
             'type': 'input',
@@ -72,6 +81,8 @@ def spam_info():
             'validate': NumberValidator
         }
     ]
+    if inp['type']=='Enter multiple usernames through a file':
+        questions[0]['message'] = 'Enter the filename containing the usernames: '
     answers = prompt(questions, style=styler())
     return answers
 

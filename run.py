@@ -15,9 +15,12 @@ if "./User_Data" not in files:
     login_inf = login_info()
 else:
     pass
+
 print("\033[91m {}\033[00m" .format('Enter spam details!'))
+
 # USER INPUTS
 spam_r = spam_info()
+
 # DRIVER CONFIGS AND DECLARATIONS
 if platform.system().lower() == 'linux':
     options = webdriver.ChromeOptions()
@@ -26,10 +29,19 @@ if platform.system().lower() == 'linux':
     driver = webdriver.Chrome('chromedriver', options=options)
     wait = WebDriverWait(driver, 40)
 
+
 if "./User_Data" not in files:
 
     # login_inf = login_info()
     login(driver, wait, e_co, By, username=login_inf['username'], password=login_inf['password'])
 else:
     pass
-spam(driver, wait, e_co, By, count=spam_r['count'], inp=spam_r['contact'], msg=spam_r['msg'])
+if '.txt' in spam_r['contact']:
+    with open(spam_r['contact'],'r') as listo:
+        data = listo.read()
+        list_of_contacts = data.split('\n')
+    print(list_of_contacts)
+
+    spam(driver, wait, e_co, By, count=spam_r['count'], msg=spam_r['msg'],list_of_usernames=list_of_contacts)
+else:
+    spam(driver, wait, e_co, By, count=spam_r['count'], inp=spam_r['contact'], msg=spam_r['msg'])

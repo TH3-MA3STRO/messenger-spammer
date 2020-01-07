@@ -1,7 +1,3 @@
 selenium
 pyinquirer
-promt_toolkit==1.0.14
 pyfiglet
-glob
-json
-time
