@@ -1,3 +1,7 @@
 selenium
 pyinquirer
+<<<<<<< HEAD
 pyfiglet
+=======
+pyfiglet
+>>>>>>> 1c99c45377062290e7c0151f955be3baa96de8da
